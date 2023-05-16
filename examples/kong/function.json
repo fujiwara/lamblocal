@@ -1,0 +1,13 @@
+{
+  "Environment": {
+    "Variables": {
+      "FOO": "BAR"
+    }
+  },
+  "FunctionName": "hello-go",
+  "Handler": "bootstrap",
+  "MemorySize": 128,
+  "Role": "arn:aws:iam::314472643515:role/AWSLambdaBasicExecutionRole",
+  "Runtime": "provided.al2",
+  "Timeout": 3
+}
