@@ -20,11 +20,11 @@ func Run[T any, U any](ctx context.Context, fn func(context.Context, T) (U, erro
 		lambda.Start(fn)
 	} else {
 		out, err := RunCLI(ctx, os.Stdin, fn)
-		fmt.Print(out)
 		if err != nil {
 			Logger.Error(err.Error())
 			os.Exit(1)
 		}
+		json.NewEncoder(os.Stdout).Encode(out)
 	}
 }
 
