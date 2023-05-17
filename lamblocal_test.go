@@ -38,3 +38,15 @@ func TestRunCLIError(t *testing.T) {
 		lamblocal.Logger.Error(err.Error())
 	}
 }
+
+func TestRunCLINoPayload(t *testing.T) {
+	handler := func(ctx context.Context, _ interface{}) (string, error) {
+		return "OK", nil
+	}
+	src := strings.NewReader(``)
+	if out, err := lamblocal.RunCLI(context.Background(), src, handler); err != nil {
+		t.Fatal(err)
+	} else {
+		t.Log(out)
+	}
+}

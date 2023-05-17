@@ -32,6 +32,9 @@ func Run[T any, U any](ctx context.Context, fn func(context.Context, T) (U, erro
 func RunCLI[T any, U any](ctx context.Context, src io.Reader, fn func(context.Context, T) (U, error)) (U, error) {
 	payload := new(T)
 	if err := json.NewDecoder(src).Decode(payload); err != nil {
+		if err == io.EOF {
+			return fn(ctx, *payload)
+		}
 		return *new(U), fmt.Errorf("failed to decode payload: %w", err)
 	}
 	return fn(ctx, *payload)
