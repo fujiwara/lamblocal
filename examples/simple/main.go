@@ -3,9 +3,10 @@ package main
 import (
 	"context"
 
+	"log/slog"
+
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/fujiwara/lamblocal"
-	"golang.org/x/exp/slog"
 )
 
 func myHandler(ctx context.Context, payload events.CloudWatchEvent) (string, error) {

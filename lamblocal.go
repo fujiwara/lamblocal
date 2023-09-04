@@ -8,8 +8,9 @@ import (
 	"os"
 	"strings"
 
+	"log/slog"
+
 	"github.com/aws/aws-lambda-go/lambda"
-	"golang.org/x/exp/slog" // TODO: Go 1.21 may use "slog".
 )
 
 var Logger = slog.New(slog.NewJSONHandler(os.Stderr, nil))

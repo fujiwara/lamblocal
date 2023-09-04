@@ -6,9 +6,10 @@ import (
 	"strings"
 	"testing"
 
+	"log/slog"
+
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/fujiwara/lamblocal"
-	"golang.org/x/exp/slog"
 )
 
 func TestRunCLIOK(t *testing.T) {
