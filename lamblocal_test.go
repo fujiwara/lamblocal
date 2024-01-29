@@ -50,3 +50,16 @@ func TestRunCLINoPayload(t *testing.T) {
 		t.Log(out)
 	}
 }
+
+func TestRunWithPayload(t *testing.T) {
+	result := "NG"
+	handler := func(ctx context.Context, s string) (string, error) {
+		result = s
+		return "", nil
+	}
+	lamblocal.CLISrc = strings.NewReader(`"OK"`)
+	lamblocal.Run(context.Background(), handler)
+	if result != "OK" {
+		t.Error("unexpected result:", result)
+	}
+}
