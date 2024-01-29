@@ -17,9 +17,10 @@ package main
 import (
 	"context"
 
+	"log/slog"
+
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/fujiwara/lamblocal"
-	"golang.org/x/exp/slog"
 )
 
 func myHandler(ctx context.Context, payload events.CloudWatchEvent) (string, error) {
@@ -39,7 +40,7 @@ In all other environments, fn is executed as a CLI (Command Line Interface) func
 
 ### Logger
 
-`lamblocal.Logger` is a logger that outputs to stderr as JSON format, using [slog](https://pkg.go.dev/golang.org/x/exp/slog).
+`lamblocal.Logger` is a logger that outputs to stderr as JSON format, using [slog](https://pkg.go.dev/log/slog).
 
 ## Limitation
 

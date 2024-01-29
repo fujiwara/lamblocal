@@ -3,10 +3,11 @@ package main
 import (
 	"context"
 
+	"log/slog"
+
 	"github.com/alecthomas/kong"
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/fujiwara/lamblocal"
-	"golang.org/x/exp/slog"
 )
 
 type CLI struct {
