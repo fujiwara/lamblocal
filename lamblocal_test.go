@@ -2,6 +2,7 @@ package lamblocal_test
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"strings"
 	"testing"
@@ -12,7 +13,7 @@ import (
 	"github.com/fujiwara/lamblocal"
 )
 
-func TestRunCLIOK(t *testing.T) {
+func TestRunCLI_OK(t *testing.T) {
 	handler := func(ctx context.Context, payload events.CloudWatchEvent) (string, error) {
 		lamblocal.Logger.Info("hello", slog.String("ID", payload.ID))
 		return "OK", nil
@@ -62,5 +63,20 @@ func TestRunWithPayload(t *testing.T) {
 	lamblocal.Run(context.Background(), handler)
 	if result != "OK" {
 		t.Error("unexpected result:", result)
+	}
+}
+
+func TestRunWithError(t *testing.T) {
+	e := errors.New("error")
+	handler := func(ctx context.Context, _ struct{}) (struct{}, error) {
+		return struct{}{}, e
+	}
+	lamblocal.CLISrc = strings.NewReader(`{}`)
+	err := lamblocal.RunWithError(context.Background(), handler)
+	if err == nil {
+		t.Error("error expected")
+	}
+	if err != e {
+		t.Error("unexpected error:", err)
 	}
 }
